@@ -51,10 +51,13 @@ function Figure(fig)
   local alignment = "center"
   pandoc.walk_block(fig,filter_image)
   local_raw_block_table = {}
-  local attr_construct= [[```{r ]] .. identifier ..[[, echo=FALSE , fig.cap="]] .. caption .. [[", fig.alt="]].. alt .. [[", fig.align=]].. alignment..[[}]] .. string.char(10)
+  local attr_construct= [[```{r ]] .. identifier ..[[, echo=FALSE , fig.cap="]] .. caption 
+  .. [[", fig.alt="]].. alt .. [[", fig.align="]].. alignment..[["}]] .. string.char(10)
   -- if single image and width defined
   if #figure_src == 1 then
-    attr_construct= [[```{r ]] .. identifier ..[[, echo=FALSE , fig.cap="]] .. caption .. [[", fig.alt="]] .. alt .. [[", fig.align=]].. alignment ..[[, out.width="]] .. figure_width[1] .. [["}]] .. string.char(10)    
+    attr_construct= [[```{r ]] .. identifier ..[[, echo=FALSE , fig.cap="]] .. caption 
+    .. [[", fig.alt="]] .. alt .. [[", fig.align="]].. alignment ..[[", out.width="]] 
+    .. figure_width[1] .. [["}]] .. string.char(10)    
   end
   table.insert(local_raw_block_table,attr_construct)
   for i = 1,#figure_src,1 do

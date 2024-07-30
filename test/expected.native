@@ -14,7 +14,7 @@ Pandoc
   , Plain
       [ RawInline
           (Format "markdown")
-          "```{r figure:rlogo, echo=FALSE , fig.cap=\"The logo of R.\", fig.alt=\"graphic without alt text\", fig.align=center, out.width=\"35.0%\"}\nknitr::include_graphics(\"Rlogo-5.png\")\n```"
+          "```{r figure:rlogo, echo=FALSE , fig.cap=\"The logo of R.\", fig.alt=\"graphic without alt text\", fig.align=\"center\", out.width=\"35.0%\"}\nknitr::include_graphics(\"Rlogo-5.png\")\n```"
       ]
   , Header
       2
@@ -30,6 +30,6 @@ Pandoc
   , Plain
       [ RawInline
           (Format "markdown")
-          "```{r figure:rlogo2, echo=FALSE , fig.cap=\"Two logos of R.\", fig.alt=\"graphic without alt text\", fig.align=center}\nknitr::include_graphics(\"Rlogo-5.png\")\nknitr::include_graphics(\"Rlogo-5-alt.png\")\n```"
+          "```{r figure:rlogo2, echo=FALSE , fig.cap=\"Two logos of R.\", fig.alt=\"graphic without alt text\", fig.align=\"center\"}\nknitr::include_graphics(\"Rlogo-5.png\")\nknitr::include_graphics(\"Rlogo-5-alt.png\")\n```"
       ]
   ]

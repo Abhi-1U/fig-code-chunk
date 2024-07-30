@@ -1,4 +1,4 @@
 input-files: ["test/input.tex"]
 standalone: true
 filters:
-  - {type: lua, path: fig-code-chunk.git.lua}
+  - {type: lua, path: fig-code-chunk.lua}

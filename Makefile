@@ -62,7 +62,7 @@ test: $(FILTER_FILE) test/input.tex test/test.yaml
 # would cause it to be regenerated on each run, making the test
 # pointless.
 .PHONY: generate
-generate: $(FILTER_FILE) test/input.tex test/test.yaml
+generate: $(FILTER_FILE) test/input.md test/test.yaml
 	@for ext in $(FORMAT) ; do \
 		$(PANDOC) --defaults test/test.yaml --to $$ext \
 		--output test/expected.$$ext ; \
