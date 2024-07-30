@@ -1,76 +1,35 @@
 Pandoc
-  Meta
-    { unMeta =
-        fromList
-          [ ( "author" , MetaInlines [ Str "Nullus" ] )
-          , ( "subtitle"
-            , MetaInlines [ Str "Lorem" , Space , Str "ipsum" ]
-            )
-          , ( "title" , MetaInlines [ Str "Greetings!" ] )
-          ]
-    }
-  [ Para
-      [ Str "Hello"
+  Meta { unMeta = fromList [] }
+  [ Header
+      2
+      ( "figure-with-single-image" , [] , [] )
+      [ Str "Figure"
       , Space
-      , Str "from"
+      , Str "with"
       , Space
-      , Str "the"
+      , Str "single"
       , Space
-      , Str "Lua"
-      , Space
-      , Str "filter!"
+      , Str "image"
       ]
-  , Para
-      [ Str "Lorem"
+  , Plain
+      [ RawInline
+          (Format "markdown")
+          "```{r figure:rlogo, echo=FALSE , fig.cap=\"The logo of R.\", fig.alt=\"graphic without alt text\", fig.align=center, out.width=\"35.0%\"}\nknitr::include_graphics(\"Rlogo-5.png\")\n```"
+      ]
+  , Header
+      2
+      ( "figure-with-multiple-images" , [] , [] )
+      [ Str "Figure"
       , Space
-      , Str "ipsum"
+      , Str "with"
       , Space
-      , Str "dolor"
+      , Str "Multiple"
       , Space
-      , Str "sit"
-      , Space
-      , Str "amet,"
-      , Space
-      , Str "consectetuer"
-      , Space
-      , Str "adipiscing"
-      , Space
-      , Str "elit."
-      , Space
-      , Str "Donec"
-      , SoftBreak
-      , Str "hendrerit"
-      , Space
-      , Str "tempor"
-      , Space
-      , Str "tellus."
-      , Space
-      , Str "Donec"
-      , Space
-      , Str "pretium"
-      , Space
-      , Str "posuere"
-      , Space
-      , Str "tellus."
-      , Space
-      , Str "Proin"
-      , Space
-      , Str "quam"
-      , SoftBreak
-      , Str "nisl,"
-      , Space
-      , Str "tincidunt"
-      , Space
-      , Str "et,"
-      , Space
-      , Str "mattis"
-      , Space
-      , Str "eget,"
-      , Space
-      , Str "convallis"
-      , Space
-      , Str "nec,"
-      , Space
-      , Str "purus."
+      , Str "images"
+      ]
+  , Plain
+      [ RawInline
+          (Format "markdown")
+          "```{r figure:rlogo2, echo=FALSE , fig.cap=\"Two logos of R.\", fig.alt=\"graphic without alt text\", fig.align=center}\nknitr::include_graphics(\"Rlogo-5.png\")\nknitr::include_graphics(\"Rlogo-5-alt.png\")\n```"
       ]
   ]
