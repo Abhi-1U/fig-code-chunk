@@ -7,6 +7,7 @@
 -- filter.
 PANDOC_VERSION:must_be_at_least '3.1'
 
+-- extracts image paths and widths
 filter_image = {
   Image = function(img)
       table.insert(figure_src,img.src)
@@ -37,8 +38,59 @@ filter_image = {
   end
 }
 
+filter_check = {
+  Image = function(el)
+    if el.src:match('alg/') then
+        local_fig_count = local_fig_count+1
+         is_alg = 1
+         is_fig = 0
+    elseif el.src:match('lst/') then
+        local_fig_count = local_fig_count+1
+         is_listing = 1
+         is_fig = 0
+    elseif el.src:match('tikz/') then
+        local_fig_count = local_fig_count+1
+         tikz_style=1
+         is_fig = 1
+         is_alg = 0
+     else
+         local_fig_count = local_fig_count+1
+         is_fig = 1
+         is_alg = 0
+     end
+  end,
+  Para = function(el)
+         string_el = pandoc.utils.stringify(el)
+         if string_el:find('^(= %[)') then
+             tikz_style = 1
+         end
+  end,
+ CodeBlock = function(el)
+         is_code = 1
+ end,
+ Table = function(el)
+         is_wdtable = 1
+ end
+}
+
+
 function Figure(fig)
-  
+  -- temp variable to check for algorithm image
+  is_alg = 0
+  -- temp variable to check for figure image
+  is_fig = 0
+  is_listing = 0
+  -- temp variable to check for widetable
+  is_wdtable = 0
+  is_code = 0
+  tikz_syle = 0
+  local_fig_count = 0
+  pandoc.walk_block(fig,filter_check)
+  -- Checks for code blocks or tables within the Figure environment
+  -- falls back to default handling.
+  if (is_code == 1) or (is_wdtable == 1) then
+    return fig
+  end
   figure_src = {}
   figure_width = {}
   -- identifier % label

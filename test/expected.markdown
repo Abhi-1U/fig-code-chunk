@@ -10,3 +10,10 @@ knitr::include_graphics("Rlogo-5.png")
 knitr::include_graphics("Rlogo-5.png")
 knitr::include_graphics("Rlogo-5-alt.png")
 ```
+
+## CodeBlock in Figure environment
+
+<figure id="code:helloworld">
+<pre><code>    print(&quot;Hello World&quot;)</code></pre>
+<figcaption>Hello World!</figcaption>
+</figure>
