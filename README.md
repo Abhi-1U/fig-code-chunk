@@ -5,14 +5,13 @@ fig-code-chunk
 
 This filter transforms a figure block into R markdown style code chunk to include figure.
 
-[CI badge]: https://img.shields.io/github/actions/workflow/status/Abhi-1U/fig-code-chunk.git/ci.yaml?branch=main
-[CI workflow]: https://github.com/Abhi-1U/fig-code-chunk.git/actions/workflows/ci.yaml
+[CI badge]: https://img.shields.io/github/actions/workflow/status/Abhi-1U/fig-code-chunk/ci.yaml?branch=main
+[CI workflow]: https://github.com/Abhi-1U/fig-code-chunk/actions/workflows/ci.yaml
 
 
 Usage
 ------------------------------------------------------------------
 
-### 
 
 ```
 input-format: LaTeX
