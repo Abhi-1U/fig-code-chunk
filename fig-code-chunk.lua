@@ -104,12 +104,12 @@ function Figure(fig)
   pandoc.walk_block(fig,filter_image)
   local_raw_block_table = {}
   local attr_construct= [[```{r ]] .. identifier ..[[, echo=FALSE , fig.cap="]] .. caption 
-  .. [[", fig.alt="]].. alt .. [[", fig.align="]].. alignment..[["}]] .. string.char(10)
+  .. [[", fig.alt="]].. alt .. [[",fig.show='hold', fig.align="]].. alignment..[["}]] .. string.char(10)
   -- if single image and width defined
-  if #figure_src == 1 then
+  if #figure_src >= 1 then
     attr_construct= [[```{r ]] .. identifier ..[[, echo=FALSE , fig.cap="]] .. caption 
-    .. [[", fig.alt="]] .. alt .. [[", fig.align="]].. alignment ..[[", out.width="]] 
-    .. figure_width[1] .. [["}]] .. string.char(10)    
+    .. [[", fig.alt="]] .. alt .. [[", fig.show='hold', fig.align="]].. alignment ..[[", out.width="]] 
+    .. figure_width[1] .. [["}]] .. string.char(10)
   end
   table.insert(local_raw_block_table,attr_construct)
   local knitr_command='knitr::include_graphics(c('
