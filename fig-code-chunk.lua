@@ -112,10 +112,15 @@ function Figure(fig)
     .. figure_width[1] .. [["}]] .. string.char(10)    
   end
   table.insert(local_raw_block_table,attr_construct)
+  local knitr_command='knitr::include_graphics(c('
   for i = 1,#figure_src,1 do
-    local knitr_command='knitr::include_graphics("'.. figure_src[i] ..'")' .. string.char(10)
-    table.insert(local_raw_block_table,knitr_command)
+    if i ~= 1 then
+      knitr_command= knitr_command .. [[,]]    
+    end
+    knitr_command= knitr_command .. [["]] .. figure_src[i] .. [["]]
   end
+  knitr_command = knitr_command ..'))' .. string.char(10)
+  table.insert(local_raw_block_table,knitr_command)
   local attr_end = [[```]]
   table.insert(local_raw_block_table,attr_end)
   -- Markdown Rawblock to replace the existing Figure element
