@@ -7,6 +7,17 @@
 -- filter.
 PANDOC_VERSION:must_be_at_least '3.1'
 
+old_session = false
+function write_to_file(filename,open_mode,content)
+  local file,err = io.open(filename,open_mode)
+  if file then
+      file:write(content .. "\n")
+      file:close()
+  else
+      print("error:", err)
+  end
+end
+
 -- extracts image paths and widths
 filter_image = {
   Image = function(img)
@@ -94,9 +105,15 @@ function Figure(fig)
   figure_src = {}
   figure_width = {}
   -- identifier % label
-  local identifier = fig.identifier
+  if old_session then
+    write_to_file("fig_refs.txt",'a',pandoc.utils.stringify(fig.identifier))
+  else
+    write_to_file("fig_refs.txt",'w',pandoc.utils.stringify(fig.identifier))
+    old_session = true
+  end
+  local identifier = sanitize_identifier(fig.identifier)
   -- caption % need to stringify
-  local caption = pandoc.utils.stringify(fig.caption)
+  local caption = pandoc.utils.stringify(fig.caption.long)
   -- alt % default alt text for images
   local alt = "graphic without alt text"
   -- alignment % default center
@@ -126,4 +143,14 @@ function Figure(fig)
   -- Markdown Rawblock to replace the existing Figure element
   knitr_block = pandoc.RawInline('markdown', pandoc.utils.stringify(local_raw_block_table))
   return knitr_block
+end
+
+function sanitize_identifier(identifier)
+  l = identifier
+  l = string.gsub(l, "%.", "-")
+  l = string.gsub(l, "_", "-")
+  l = string.gsub(l, " ", "-")
+  l = string.gsub(l,"#","")
+  l = string.gsub(l,":","")
+  return l
 end
